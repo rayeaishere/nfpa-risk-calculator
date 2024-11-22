@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Resiko Bahan Kimia - NFPA 704</title>
+    <style>
+        body {
+            font-family: Georgia, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            color: #444;
+        }
+        .input-group {
+            margin: 15px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="number"], select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        input[type="number"]:focus, select:focus {
+            border-color: #333;
+        }
+        .nfpa-diamond {
+            display: grid;
+            grid-template-columns: repeat(3, 60px);
+            grid-template-rows: repeat(3, 60px);
+            gap: 5px;
+            margin: 20px auto;
+            transform: rotate(0deg);
+        }
+        .nfpa-diamond div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: black;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .health { background-color: #0077be; }
+        .flammability { background-color: #e74c3c; }
+        .reactivity { background-color: #f1c40f; color: #333; }
+        .special { background-color: #e0e0e0; color: #333; }
+        button {
+            padding: 12px 25px;
+            font-size: 1em;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #0077be;
+            color: white;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #005c9a;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Kalkulator Resiko Bahan Kimia</h1>
+
+        <div class="input-group">
+            <label for="health">Kesehatan (0-4)</label>
+            <input type="number" id="health" min="0" max="4" value="0">
+        </div>
+        <div class="input-group">
+            <label for="flammability">Kebakaran (0-4)</label>
+            <input type="number" id="flammability" min="0" max="4" value="0">
+        </div>
+        <div class="input-group">
+            <label for="reactivity">Reaktivitas (0-4)</label>
+            <input type="number" id="reactivity" min="0" max="4" value="0">
+        </div>
+        <div class="input-group">
+            <label for="special">Bahaya Khusus</label>
+            <select id="special">
+                <option value="">Tidak ada</option>
+                <option value="OX">Oksidator</option>
+                <option value="W">Reaktif dengan air</option>
+                <option value="ACID">Acid</option>
+                <option value="ALK">Alkali</option>
+                <option value="COR">Korosif</option>
+            </select>
+        </div>
+
+        <button onclick="generateNFPA()">Tampilkan Simbol NFPA</button>
+
+        <div class="nfpa-diamond" id="nfpaDiamond">
+            <div></div>
+            <div class="flammability" id="flammabilityDisplay">0</div>
+            <div></div>
+            <div class="health" id="healthDisplay">0</div>
+            <div class="special" id="specialDisplay"></div>
+            <div class="reactivity" id="reactivityDisplay">0</div>
+            <div></div>
+        </div>
+    </div>
+
+    <script>
+        function generateNFPA() {
+            const health = document.getElementById("health").value;
+            const flammability = document.getElementById("flammability").value;
+            const reactivity = document.getElementById("reactivity").value;
+            const special = document.getElementById("special").value;
+
+            document.getElementById("healthDisplay").textContent = health;
+            document.getElementById("flammabilityDisplay").textContent = flammability;
+            document.getElementById("reactivityDisplay").textContent = reactivity;
+            document.getElementById("specialDisplay").textContent = special;
+        }
+    </script>
+
+</body>
+</html>
